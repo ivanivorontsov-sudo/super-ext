@@ -22,7 +22,7 @@ c.onmouseup = e => { if (!start) return; const b = pos(e), r = [Math.min(start[0
   if (tool === 'crop' && r[2] > 4 && r[3] > 4) { x.putImageData(snap, 0, 0); const d = x.getImageData(...r); c.width = r[2]; c.height = r[3]; x.putImageData(d, 0, 0); hist.length = 0; }
   start = null; };
 document.getElementById('undo').onclick = () => { const h = hist.pop(); if (h) { c.width = h.width; c.height = h.height; x.putImageData(h, 0, 0); } };
-const save = (type, ext) => c.toBlob(b => { const u = URL.createObjectURL(b); chrome.downloads.download({url: u, filename: `${title}.${ext}`, saveAs: true}); }, type, .92);
+const save = (type, ext) => c.toBlob(b => { const u = URL.createObjectURL(b); chrome.downloads.download({url: u, filename: `${title}.${ext}`, saveAs: false}); }, type, .92);
 document.getElementById('png').onclick = () => save('image/png', 'png');
 document.getElementById('jpg').onclick = () => save('image/jpeg', 'jpg');
 document.getElementById('copy').onclick = () => c.toBlob(async b => { await navigator.clipboard.write([new ClipboardItem({'image/png': b})]); document.getElementById('msg').textContent = 'Скопировано в буфер обмена'; });

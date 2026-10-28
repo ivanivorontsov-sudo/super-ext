@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "СуперАпп — загрузки, YouTube, скриншоты",
   "short_name": "СуперАпп",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Поиск и быстрая загрузка медиа и данных, петля и дизлайки YouTube, скриншоты, сохранение страниц, мобильный вид, полезные инструменты. Без телеметрии.",
   "icons": {"16":"icons/i16.png","32":"icons/i32.png","48":"icons/i48.png","128":"icons/i128.png"},
   "action": {"default_popup": "popup.html", "default_title": "СуперАпп"},

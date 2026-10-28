@@ -127,9 +127,10 @@ chrome.runtime.onMessage.addListener((msg, sender, reply) => {
       }
       case 'getShot': return reply(lastShot);
       case 'saveMHTML': {
-        const blob = await chrome.pageCapture.saveAsMHTML({tabId: tab.id});
+        let data;
+        for (let i = 0; ; i++) { try { data = await (await chrome.pageCapture.saveAsMHTML({tabId: tab.id})).arrayBuffer(); break; } catch (e) { if (i >= 3) throw e; await new Promise(r => setTimeout(r, 400)); } }
         const name = (tab.title||'page').replace(/[\\/:*?"<>|]+/g,'_').slice(0,100) + '.mhtml';
-        await chrome.downloads.download({url: await blobToDataUrl(new Blob([await blob.arrayBuffer()], {type:'multipart/related'})), filename: name, saveAs: true});
+        await chrome.downloads.download({url: await blobToDataUrl(new Blob([data], {type:'multipart/related'})), filename: name, saveAs: false});
         return reply(true);
       }
       case 'dislikes': {
