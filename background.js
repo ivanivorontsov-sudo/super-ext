@@ -1,3 +1,4 @@
+importScripts('vt/bg.js');
 // СуперАпп — фоновый сервис. Никакой телеметрии: сетевые запросы только к сайтам, которые вы открыли, и к returnyoutubedislikeapi.com.
 const media = {}; // tabId -> Map(url -> info)
 const MEDIA_RE = /\.(m3u8|mpd|mp4|webm|mkv|mov|m4v|mp3|m4a|aac|ogg|opus|wav|flac)(\?|#|$)/i;
@@ -110,6 +111,7 @@ async function startRegion(tabId) {
 }
 
 chrome.runtime.onMessage.addListener((msg, sender, reply) => {
+  if (msg.cmd?.startsWith('vt.')) return;
   (async () => {
     const tab = msg.tabId ? await chrome.tabs.get(msg.tabId) : sender.tab;
     switch (msg.cmd) {

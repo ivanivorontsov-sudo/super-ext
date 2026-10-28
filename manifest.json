@@ -1,18 +1,81 @@
 {
-  "manifest_version": 3,
-  "name": "СуперАпп — загрузки, YouTube, скриншоты",
-  "short_name": "СуперАпп",
-  "version": "1.1.0",
-  "description": "Поиск и быстрая загрузка медиа и данных, петля и дизлайки YouTube, скриншоты, сохранение страниц, мобильный вид, полезные инструменты. Без телеметрии.",
-  "icons": {"16":"icons/i16.png","32":"icons/i32.png","48":"icons/i48.png","128":"icons/i128.png"},
-  "action": {"default_popup": "popup.html", "default_title": "СуперАпп"},
-  "side_panel": {"default_path": "panel.html"},
-  "options_page": "options.html",
-  "background": {"service_worker": "background.js"},
-  "permissions": ["activeTab","tabs","scripting","downloads","storage","sidePanel","webRequest","contextMenus","pageCapture","declarativeNetRequestWithHostAccess","unlimitedStorage"],
-  "host_permissions": ["<all_urls>"],
-  "content_scripts": [
-    {"matches": ["<all_urls>"], "js": ["content.js"], "run_at": "document_idle", "all_frames": false},
-    {"matches": ["https://www.youtube.com/*","https://m.youtube.com/*"], "js": ["youtube.js"], "css": ["youtube.css"], "run_at": "document_idle"}
-  ]
+ "manifest_version": 3,
+ "name": "СуперАпп — загрузки, YouTube, скриншоты",
+ "short_name": "СуперАпп",
+ "version": "1.2.0",
+ "description": "Поиск и быстрая загрузка медиа и данных, петля и дизлайки YouTube, скриншоты, сохранение страниц, мобильный вид, полезные инструменты. Переводчик видео: субтитры и закадровый голос. Без телеметрии.",
+ "icons": {
+  "16": "icons/i16.png",
+  "32": "icons/i32.png",
+  "48": "icons/i48.png",
+  "128": "icons/i128.png"
+ },
+ "action": {
+  "default_popup": "popup.html",
+  "default_title": "СуперАпп"
+ },
+ "side_panel": {
+  "default_path": "panel.html"
+ },
+ "options_page": "options.html",
+ "background": {
+  "service_worker": "background.js"
+ },
+ "permissions": [
+  "activeTab",
+  "tabs",
+  "scripting",
+  "downloads",
+  "storage",
+  "sidePanel",
+  "webRequest",
+  "contextMenus",
+  "pageCapture",
+  "declarativeNetRequestWithHostAccess",
+  "unlimitedStorage",
+  "tabCapture",
+  "offscreen",
+  "tts"
+ ],
+ "host_permissions": [
+  "<all_urls>"
+ ],
+ "content_scripts": [
+  {
+   "matches": [
+    "<all_urls>"
+   ],
+   "js": [
+    "content.js"
+   ],
+   "run_at": "document_idle",
+   "all_frames": false
+  },
+  {
+   "matches": [
+    "https://www.youtube.com/*",
+    "https://m.youtube.com/*"
+   ],
+   "js": [
+    "youtube.js"
+   ],
+   "css": [
+    "youtube.css"
+   ],
+   "run_at": "document_idle"
+  },
+  {
+   "matches": [
+    "<all_urls>"
+   ],
+   "js": [
+    "vt/common.js",
+    "vt/content.js"
+   ],
+   "run_at": "document_idle"
+  }
+ ],
+ "content_security_policy": {
+  "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+ }
 }
